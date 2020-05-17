@@ -2,7 +2,6 @@ import pandas as pd
 from bs4 import BeautifulSoup
 import re
 
-# link = 'https://steamcommunity.com/id/sp1nalcord/gcpd/730?tab=matchhistorycompetitive'
 
 # List to store the stats.
 ls_all = []
@@ -18,7 +17,7 @@ ls_match_score = []
 ls_score = []
 
 # Open the page.
-with open('data/CSGO_ABHI.html', encoding='utf8') as file:
+with open('data/CSGO.html', encoding='utf8') as file:
     # Parse.
     soup = BeautifulSoup(file, 'html.parser')
     # Find main class.
@@ -68,4 +67,4 @@ df['Score'] = ls_score
 df = df.replace(r'^\s*$', 0, regex=True)
 print(df)
 # Save the data to a CSV file.
-df.to_csv('CSGO_Data_Abhi.csv')
+df.to_csv('CSGO_Data.csv')

@@ -17,7 +17,7 @@ ls_match_score = []
 ls_score = []
 
 # Open the page.
-with open('data/CSGO.html', encoding='utf8') as file:
+with open('YOUR FILE PATH', encoding='utf8') as file:
     # Parse.
     soup = BeautifulSoup(file, 'html.parser')
     # Find main class.

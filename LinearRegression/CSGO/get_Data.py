@@ -3,9 +3,8 @@ from bs4 import BeautifulSoup
 import re
 
 # link = 'https://steamcommunity.com/id/sp1nalcord/gcpd/730?tab=matchhistorycompetitive'
-# url = requests.get(link)
-# soup = BeautifulSoup(url.content, 'html.parser')
 
+# List to store the stats.
 ls_all = []
 ls_player = []
 ls_score = []
@@ -18,28 +17,32 @@ ls_hsp = []
 ls_match_score = []
 ls_score = []
 
-with open('data/CSGO.html', encoding='utf8') as file:
+# Open the page.
+with open('data/CSGO_ABHI.html', encoding='utf8') as file:
+    # Parse.
     soup = BeautifulSoup(file, 'html.parser')
+    # Find main class.
     table_ = soup.find(class_='generic_kv_table csgo_scoreboard_root')
+    # Find sub class.
     table = table_.find_all(class_='csgo_scoreboard_inner_right banchecker-formatted')
-    for i in range(0, 2):
+    # Get data for each match.
+    for i in range(0, len(table)):
         print(i)
         for row in table[i].find_all('td'):
             if row.find('a'):
-                # print(row.get_text())
                 name = row.get_text().strip()
-                #if re.match(r'^\w+$', name):
+                # Append name of the players.
                 ls_player.append(name)
-                # else:
-                #     ls_player.append('-')
+            # Match Score
             elif "colspan" in row.attrs:
                 # print(row.get_text())
                 ls_match_score.append(row.get_text().strip())
+            # Game stats.
             else:
                 # print(row.get_text())
                 ls_all.append(row.get_text().strip())
-# print(soup)
-# print(ls_all)
+
+# Appending individual stats of all players.
 for i in range(0, len(ls_all), 7):
     ls_ping.append(ls_all[i])
     ls_kill.append(ls_all[i + 1])
@@ -47,17 +50,11 @@ for i in range(0, len(ls_all), 7):
     ls_death.append(ls_all[i + 3])
     ls_all[i+4] = ls_all[i+4].replace('★', '')
     ls_mvp.append(ls_all[i + 4])
+    ls_all[i + 5] = ls_all[i + 5].replace('%', '')
     ls_hsp.append(ls_all[i + 5])
     ls_score.append(ls_all[i + 6])
 
-# print(len(ls_ping))
-# print(len(ls_kill))
-# print(len(ls_assist))
-# print(len(ls_death))
-# print(len(ls_mvp))
-# print(len(ls_hsp))
-# print(len(ls_score))
-
+# Created a DataFrame for easy manipulation.
 df = pd.DataFrame()
 df['Player Name'] = ls_player
 df['Ping'] = ls_ping
@@ -67,6 +64,8 @@ df['Deaths'] = ls_death
 df['MVP'] = ls_mvp
 df['HSP'] = ls_hsp
 df['Score'] = ls_score
+# Replace blank space with zero.
 df = df.replace(r'^\s*$', 0, regex=True)
 print(df)
-df.to_csv('CSGO_Data.csv')
+# Save the data to a CSV file.
+df.to_csv('CSGO_Data_Abhi.csv')

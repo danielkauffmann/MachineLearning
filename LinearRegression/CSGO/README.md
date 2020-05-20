@@ -10,7 +10,7 @@ use an extension called Ban Checker For Steam and then go to your competitive ma
 the webpage somewhere. Use the Script to scrape the data and save it to a CSV file.
 
 ![image1](https://github.com/reedkihaddi/MachineLearning/blob/master/LinearRegression/CSGO/images/1.PNG)
-![image2](https://github.com/reedkihaddi/MachineLearning/blob/master/LinearRegression/CSGO/images/2.PNG) 
-![image3](https://github.com/reedkihaddi/MachineLearning/blob/master/LinearRegression/CSGO/images/3.PNG) 
+![image2](https://github.com/reedkihaddi/MachineLearning/blob/master/LinearRegression/CSGO/images/2.png) 
+![image3](https://github.com/reedkihaddi/MachineLearning/blob/master/LinearRegression/CSGO/images/3.png) 
 
 **Model Score: 0.55**
